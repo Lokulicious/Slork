@@ -11,11 +11,14 @@ public class PlayerController : MonoBehaviour
     private float horizontal;
     private float rotate;
     public Vector3 direction;
+
+    private Vector3 velocity;
+
     
     void Start()
     {
-        speed = 1000;
-        rotationSpeed = 500;
+        speed = 30;
+        rotationSpeed = 10;
         rb = GetComponent<Rigidbody>();
     }
     void FixedUpdate()
@@ -24,8 +27,17 @@ public class PlayerController : MonoBehaviour
         horizontal = Input.GetAxis("Horizontal");
         rotate = Input.GetAxis("Mouse X");
         direction = new Vector3(vertical, 0, -horizontal);
-        rb.velocity = direction * speed * Time.fixedDeltaTime;
 
-        transform.Rotate((transform.up * rotate) * rotationSpeed * Time.fixedDeltaTime);
+        
+
+
+
+        //        transform.Rotate((transform.up * rotate) * rotationSpeed * Time.fixedDeltaTime);
+
+        rb.rotation = Quaternion.Euler(rb.rotation.eulerAngles + new Vector3(0f, rotationSpeed * rotate, 0f));
+
+        velocity = rb.rotation * direction * speed;
+
+        rb.velocity = velocity * Time.fixedDeltaTime;
     }
 }
