@@ -25,14 +25,9 @@ public class PlayerController : MonoBehaviour
     {
         vertical = Input.GetAxis("Vertical");
         horizontal = Input.GetAxis("Horizontal");
+
         rotate = Input.GetAxis("Mouse X");
         direction = new Vector3(vertical, 0, -horizontal);
-
-        
-
-
-
-        //        transform.Rotate((transform.up * rotate) * rotationSpeed * Time.fixedDeltaTime);
 
         rb.rotation = Quaternion.Euler(rb.rotation.eulerAngles + new Vector3(0f, rotationSpeed * rotate, 0f));
 
