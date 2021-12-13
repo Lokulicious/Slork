@@ -31,8 +31,8 @@ public class PlayerController : MonoBehaviour
 
         rb.rotation = Quaternion.Euler(rb.rotation.eulerAngles + new Vector3(0f, rotationSpeed * rotate, 0f));
 
-        velocity = rb.rotation * direction * speed;
+        velocity = rb.rotation * direction * speed * Time.deltaTime;
 
-        rb.velocity = velocity * Time.fixedDeltaTime;
+        rb.velocity = velocity;
     }
 }
